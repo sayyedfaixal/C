@@ -143,7 +143,6 @@ void delete_at_location()
         {
             traverseNode = traverseNode->link;
         }
-        // 10->20->30->40->50->60->70->NULL
         printf("\nYou want to delete %d node : ", traverseNode->data);
         struct node *deleteNode = traverseNode->link;
         traverseNode->link = deleteNode->link;
