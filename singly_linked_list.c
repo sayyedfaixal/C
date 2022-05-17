@@ -8,6 +8,23 @@ struct node
 };
 struct node *head = NULL;
 
+// Function to get the LENGTH of the linked-list
+int length()
+{
+    if (head == NULL)
+        return 0;
+    else
+    {
+        int length = 0;
+        struct node *traverse = head;
+        while (traverse->link != NULL)
+        {
+            length++;
+            traverse = traverse->link;
+        }
+        return length;
+    }
+}
 // Funcion to PRINT the linked-list
 void display()
 {
@@ -81,14 +98,59 @@ void insert_at_location()
 // Function to DELETE a node from the END
 void delete_end()
 {
+    if (head == NULL)
+        printf("\nNo elements to delete...");
+    else
+    {
+        struct node *traverse = head;
+        struct node *holdNode;
+        while (traverse->link->link != NULL)
+        {
+            traverse = traverse->link;
+        }
+        holdNode = traverse->link;
+        traverse->link = NULL;
+        printf("\n%d : Deleted...", holdNode->data);
+        free(holdNode);
+    }
 }
 // Function to DELETE a node from the FRONT
 void delete_front()
 {
+    if (head == NULL)
+        printf("\nNo elements to delete...");
+    else
+    {
+        struct node *holdFrontNode = head;
+        head = head->link;
+        holdFrontNode->link = NULL;
+        printf("\n%d : Deleted...", holdFrontNode->data);
+        free(holdFrontNode);
+    }
 }
 // Funciton to DELETE a node from the SPECIFIED LOCATION
 void delete_at_location()
 {
+    if (head == NULL)
+        printf("\nNo elements to delete...");
+    else
+    {
+        int location;
+        printf("\nEnter the location you want to delete the node, count first node to be at location 0 : ");
+        scanf("%d", &location);
+        struct node *traverseNode = head;
+        while (location > 1)
+        {
+            traverseNode = traverseNode->link;
+        }
+        // 10->20->30->40->50->60->70->NULL
+        printf("\nYou want to delete %d node : ", traverseNode->data);
+        struct node *deleteNode = traverseNode->link;
+        traverseNode->link = deleteNode->link;
+        printf("\n%d : Deleted...", deleteNode->data);
+        deleteNode->link = NULL;
+        free(deleteNode);
+    }
 }
 int main()
 {
@@ -112,10 +174,10 @@ int main()
         case 4:
             insert_at_location();
         case 5:
-            delete_front();
+            delete_end();
             break;
         case 6:
-            delete_end();
+            delete_front();
             break;
         case 7:
             delete_at_location();
