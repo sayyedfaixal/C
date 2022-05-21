@@ -93,6 +93,45 @@ void insert_end()
 // Function to ADD a node in the SPECIFIED LOCATION
 void insert_at_location()
 {
+    int location;
+    printf("Enter the location at which you want to insert the node : ");
+    scanf("%d", &location);
+    if (location < 0)
+    {
+        printf("Hume yeda na banaiye!");
+        return;
+    }
+    else if (location > length())
+    {
+        printf("Are bhai kya kar rha hai tu!?");
+        return;
+    }
+    else if (location == 0)
+        insert_front();
+    else if (location == length() - 1)
+        insert_end();
+    else
+    {
+        struct node *tempNode = (struct node *)malloc(sizeof(struct node *));
+        if (tempNode == NULL)
+            printf("Insufficient Memory..., List can't be created");
+        else
+        {
+            struct node *traverse = head;
+            int n = 0;
+            while (n < location - 1)
+            {
+                traverse = traverse->link;
+                n++;
+            }
+            printf("\nEnter the data you want to insert into the linked list : ");
+            scanf("%d", &tempNode->data);
+            tempNode->link = NULL;
+
+            tempNode->link = traverse->link;
+            traverse->link = tempNode;
+        }
+    }
 }
 
 // Function to DELETE a node from the END
