@@ -98,12 +98,12 @@ void insert_at_location()
     scanf("%d", &location);
     if (location < 0)
     {
-        printf("Hume yeda na banaiye!");
+        printf("Entered number is negative");
         return;
     }
     else if (location > length())
     {
-        printf("Are bhai kya kar rha hai tu!?");
+        printf("Entered Number is greater than the length of the linked list...");
         return;
     }
     else if (location == 0)
@@ -175,19 +175,38 @@ void delete_at_location()
     else
     {
         int location;
-        printf("\nEnter the location you want to delete the node, count first node to be at location 1 : ");
+        printf("Enter the location at which you want to insert the node : ");
         scanf("%d", &location);
-        struct node *traverseNode = head;
-        while (location > 1)
+        if (location < 0)
         {
-            traverseNode = traverseNode->link;
+            printf("Entered number is negative");
+            return;
         }
-        printf("\nYou want to delete %d node : ", traverseNode->data);
-        struct node *deleteNode = traverseNode->link;
-        traverseNode->link = deleteNode->link;
-        printf("\n%d : Deleted...", deleteNode->data);
-        deleteNode->link = NULL;
-        free(deleteNode);
+        else if (location > length())
+        {
+            printf("Entered Number is greater than the length of the linked list...");
+            return;
+        }
+        else if (location == 0)
+            delete_front();
+        else if (location == length() - 1)
+            delete_end();
+        else
+        {
+            struct node *traverseNode = head;
+            int n = 0;
+            while (n < location - 1)
+            {
+                traverseNode = traverseNode->link;
+                n++;
+            }
+            printf("\nYou want to delete %d node : ", traverseNode->data);
+            struct node *deleteNode = traverseNode->link;
+            traverseNode->link = deleteNode->link;
+            printf("\n%d : Deleted...", deleteNode->data);
+            deleteNode->link = NULL;
+            free(deleteNode);
+        }
     }
 }
 int main()
