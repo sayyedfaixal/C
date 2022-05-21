@@ -136,7 +136,7 @@ void delete_at_location()
     else
     {
         int location;
-        printf("\nEnter the location you want to delete the node, count first node to be at location 0 : ");
+        printf("\nEnter the location you want to delete the node, count first node to be at location 1 : ");
         scanf("%d", &location);
         struct node *traverseNode = head;
         while (location > 1)
@@ -172,6 +172,7 @@ int main()
             break;
         case 4:
             insert_at_location();
+            break;
         case 5:
             delete_end();
             break;
